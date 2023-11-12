@@ -16,3 +16,9 @@ query = '''
 top_products = pd.read_sql_query(query,conn)
 
 top_products.plot(x="ProductName",y="Revenue",kind="bar",figsize=(10,5),legend=False)
+
+plt.title("10 Productos mas rentables")
+plt.xlabel("Productos")
+plt.ylabel("Revenue")
+plt.xticks(rotation=90)
+plt.show()
