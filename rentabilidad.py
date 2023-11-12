@@ -33,6 +33,7 @@ query2 = '''
     ON e.EmployeeID = o.EmployeeID
     GROUP BY o.EmployeeID
     ORDER BY Total DESC
+    LIMIT 10
     '''
     
 top_employees = pd.read_sql_query(query2,conn)
