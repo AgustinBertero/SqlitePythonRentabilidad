@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 conn = sqlite3.connect("Nortwind.db")
 
+#OBTENIENDO LOS 10 PRODUCTOS MAS RENTABLES 
 query = '''
     SELECT ProductName, SUM(Price * Quantity) as Revenue
     FROM OrderDetails od
@@ -21,4 +22,25 @@ plt.title("10 Productos mas rentables")
 plt.xlabel("Productos")
 plt.ylabel("Revenue")
 plt.xticks(rotation=90)
+plt.show()
+
+#OBTENIENDO LOS 10 EMPLEADOS MAS EFECTIVOS
+
+query2 = '''
+    SELECT FirstName || " " || LastName, COUNT(*) as Total
+    FROM Orders o
+    JOIN Employees e
+    ON e.EmployeeID = o.EmployeeID
+    GROUP BY o.EmployeeID
+    ORDER BY Total DESC
+    '''
+    
+top_employees = pd.read_sql_query(query2,conn)
+top_employees.plot(x="Employees",y="Total",kind="bar",figsize=(10,5),legend=False)
+
+plt.title("Empleados más efectivos")
+plt.xlabel("Empleados")
+plt.ylabel("Total vendido")
+plt.xticks(rotation = 45)
+
 plt.show()
