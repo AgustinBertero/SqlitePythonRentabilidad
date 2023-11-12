@@ -27,7 +27,7 @@ plt.show()
 #OBTENIENDO LOS 10 EMPLEADOS MAS EFECTIVOS
 
 query2 = '''
-    SELECT FirstName || " " || LastName, COUNT(*) as Total
+    SELECT FirstName || " " || LastName as Employee, COUNT(*) as Total
     FROM Orders o
     JOIN Employees e
     ON e.EmployeeID = o.EmployeeID
@@ -36,7 +36,7 @@ query2 = '''
     '''
     
 top_employees = pd.read_sql_query(query2,conn)
-top_employees.plot(x="Employees",y="Total",kind="bar",figsize=(10,5),legend=False)
+top_employees.plot(x="Employee",y="Total",kind="bar",figsize=(10,5),legend=False)
 
 plt.title("Empleados más efectivos")
 plt.xlabel("Empleados")
